@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 
 export default function TextForm(props) {
+   
     const handleUpClick = ()=>{
         let newText = text.toUpperCase();
         setText(newText);
@@ -25,6 +26,7 @@ export default function TextForm(props) {
         var text = document.getElementById("myBox");
         text.select();
         navigator.clipboard.writeText(text.value);
+        document.getSelection().removeAllRanges();
         props.showAlert("Copied!","success");
     }
     const handleOnChange = (event)=>{
@@ -38,18 +40,18 @@ export default function TextForm(props) {
                 <div className="mb-3">
                     <textarea className="form-control" value={text} onChange={handleOnChange} style={{backgroundColor: props.mode === 'dark' ? 'grey' : 'white', color: props.mode === 'dark' ? 'white' : 'black' }} id="myBox" rows="8"></textarea>
                 </div>
-                <button className="btn btn-primary mx-1" onClick={handleUpClick}>Convert to Uppercase</button>
-                <button className="btn btn-info mx-1" onClick={handleLowClick}>Convert to Lowercase</button>
-                <button className="btn btn-danger mx-1" onClick={handleExtraSpaces}>Remove Extra Space</button>
-                <button className="btn btn-success mx-1" onClick={handleCopyClick}>Copy</button>
-                <button className="btn btn-secondary mx-1" onClick={handleClearClick}>Clear</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>Convert to Uppercase</button>
+                <button disabled={text.length===0} className="btn btn-info mx-1 my-1" onClick={handleLowClick}>Convert to Lowercase</button>
+                <button disabled={text.length===0} className="btn btn-danger mx-1 my-1" onClick={handleExtraSpaces}>Remove Extra Space</button>
+                <button disabled={text.length===0} className="btn btn-success mx-1 my-1" onClick={handleCopyClick}>Copy</button>
+                <button disabled={text.length===0} className="btn btn-secondary mx-1 my-1" onClick={handleClearClick}>Clear</button>
             </div>
             <div className="cointainer my-3" style={{color: props.mode === 'dark' ? 'white' : 'black' }}>
                 <h1>Your Text Summary</h1>
-                <p>{text.split(" ").length} words, {text.length} characters</p>
-                <p>{0.008 * text.split(" ").length} Minutes to read</p>
+                <p>{text.split(" ").filter((element)=>{return element.length!==0}).length} words, {text.length} characters</p>
+                <p>{0.008 * text.split(" ").filter((element)=>{return element.length!==0}).length} Minutes to read</p>
                 <h3>Preview</h3>
-                <p>{text.length>0?text:"Enter above in the Textbox to preview it"}</p>
+                <p>{text.length>0?text:"Nothing to preview..."}</p>
             </div>
         </>
     )

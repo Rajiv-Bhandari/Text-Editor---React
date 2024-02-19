@@ -39,10 +39,13 @@ export default function About(props) {
     //         })
     //     }
     // }
+    let myStyle = {
+      color: props.mode === 'dark' ? 'white' : 'black'
+    }
     
   return (
     // style={myStyle}
-    <div className="container" style={{color: props.mode === 'dark' ? 'white' : 'black' }}>
+    <div className="container" style={myStyle}>
         <h1 className='my-3'>About Me</h1>
         <p>
             Hi, I'm Rajiv Bhandari, currently in my final semester at Islington College, pursuing a BA (Hons) in Computing. At 21 years old, I am enthusiastic about learning and have recently embarked on my journey with React. This project marks my first experience with React, and I've previously gained proficiency in Laravel. Excited about the endless possibilities in the world of web development!
