@@ -63,7 +63,7 @@ function App() {
         <div className="container">
           <Routes>
             <Route exact path="/about" element={<About mode={mode}/>} />
-            <Route exact path="/" element={<TextForm showAlert={showAlert} heading="Enter your text below" mode={mode} />} />
+            <Route exact path="/" element={<TextForm showAlert={showAlert} heading="Enter your text below" mode={mode} changeColor={changeColor}/>} />
           </Routes>
         </div>
       </Router>
